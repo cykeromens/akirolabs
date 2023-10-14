@@ -1,0 +1,84 @@
+openapi: 3.0.1
+info:
+  title: Validate Token Service
+  description: 'Validate token generated from token-generator'
+  termsOfService: 'https://swagger.io/terms/'
+  contact:
+    email: cykeromens@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 1.0.0
+servers:
+  - url: '{protocol}://{environment}'
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+      environment:
+        default: localhost:8082    # Local server
+        enum:
+          - localhost:8082
+
+tags:
+  - name: token-validator
+    description: Validate generated token
+
+paths:
+  /api/validate:
+    post:
+      tags:
+        - token-validator
+      summary: validate token.
+      operationId: validate
+      requestBody:
+        description: Token to be validated
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateTokenRequest'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateTokenResponse'
+        400:
+          description: Invalid username supplied
+          content: { }
+        404:
+          description: User not found
+          content: { }
+
+components:
+  schemas:
+    ValidateTokenRequest:
+      title: ValidateTokenRequest
+      type: object
+      properties:
+        token:
+          type: string
+          example: '1423-3242-3312-2413'
+      required:
+        - digits
+
+    ValidateTokenResponse:
+      title: ValidateTokenResponse
+      type: object
+      properties:
+        message:
+          type: string
+        valid:
+          type: boolean
+
+  responses:
+    Problem:
+      description: error occurred - see status code and problem object for more information.
+      content:
+        'application/problem+json':
+          schema:
+            $ref: 'https://opensource.zalando.com/problem/schema.yaml#/Problem'

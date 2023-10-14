@@ -1,0 +1,82 @@
+openapi: 3.0.1
+info:
+  title: Generate Token Service
+  description: 'This is the Generator service for a token service.'
+  termsOfService: 'https://swagger.io/terms/'
+  contact:
+    email: comenuko@zimesfield.com
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 1.0.0
+servers:
+  - url: '{protocol}://{environment}'
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+      environment:
+        default: localhost:8081    # Local server
+        enum:
+          - localhost:8081
+
+tags:
+  - name: token-generator
+    description: Token with digits
+
+paths:
+  /api/generate:
+    post:
+      tags:
+        - token-generator
+      summary: generate token with digits.
+      operationId: generate
+      requestBody:
+        description: Token with digits
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateTokenRequest'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateTokenResponse'
+        400:
+          description: Invalid username supplied
+          content: { }
+        404:
+          description: User not found
+          content: { }
+
+components:
+  schemas:
+    GenerateTokenRequest:
+      title: GenerateTokenRequest
+      type: object
+      properties:
+        digits:
+          type: string
+          example: '2,4,7,9,0'
+      required:
+        - digits
+
+    GenerateTokenResponse:
+      title: GenerateTokenResponse
+      type: object
+      properties:
+        token:
+          type: string
+
+  responses:
+    Problem:
+      description: error occurred - see status code and problem object for more information.
+      content:
+        'application/problem+json':
+          schema:
+            $ref: 'https://opensource.zalando.com/problem/schema.yaml#/Problem'
