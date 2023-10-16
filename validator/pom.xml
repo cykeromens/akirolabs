@@ -19,6 +19,9 @@
         <api-file-path>${project.basedir}/src/main/resources/api.yaml</api-file-path>
         <model-package>com.akirolabs.validator.web.api.model</model-package>
         <api-package>com.akirolabs.validator.web.api</api-package>
+
+        <start-class>com.akirolabs.validator.TokenValidationApplication</start-class>
+
     </properties>
     <dependencies>
 
@@ -89,7 +92,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 

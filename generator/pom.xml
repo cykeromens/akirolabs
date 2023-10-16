@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>generator</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,6 +20,9 @@
         <api-file-path>${project.basedir}/src/main/resources/api.yaml</api-file-path>
         <model-package>com.akirolabs.generator.web.api.model</model-package>
         <api-package>com.akirolabs.generator.web.api</api-package>
+
+        <start-class>com.akirolabs.generator.TokenGeneratorApplication</start-class>
+
     </properties>
     <dependencies>
 
@@ -89,7 +93,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 

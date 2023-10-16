@@ -1,7 +1,6 @@
 package com.akirolabs.generator.service;
 
 import com.akirolabs.generator.mapper.GeneratorMapper;
-import com.akirolabs.generator.model.TokenModel;
 import com.akirolabs.generator.web.api.model.GenerateTokenRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

@@ -9,5 +9,4 @@ public class TokenValidationApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TokenValidationApplication.class, args);
 	}
-
 }

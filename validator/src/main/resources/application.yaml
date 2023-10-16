@@ -4,7 +4,6 @@ server:
 spring:
   application:
     name: validator-service
-
 logging:
   level:
     org.org.springframework.web: DEBUG
@@ -19,3 +18,7 @@ springdoc:
     path: /swagger-ui.html
     enabled: true
 
+application:
+  cors:
+    allowed-origin-patterns: "http://localhost:8080"
+    allowed-path: "/api/**"
